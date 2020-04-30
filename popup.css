@@ -1,0 +1,230 @@
+@font-face {
+    font-family: Dosis;
+    src: url(../fonts/Dosis-200.ttf);
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url(../fonts/Ubuntu-Bold.ttf);
+}
+
+@font-face {
+    font-family: AbeZee;
+    src: url(../fonts/AbeeZee-Regular.ttf);
+}
+
+:root {
+    --background-color: #e2e2e2;
+    --color: #363738;
+    --shadow-color: rgba(255, 255, 255, 0.5);
+    --list-shadow: -.3em -.2em 1em #f6f6f6, inset .4em .5em .9em #E3E3E375, .3em .2em .5em #88888890, inset -.4em -.5em .9em #E3E3E390;
+    --toggle-shadow: -8px -4px 8px 0px #302E2E, 8px 4px 12px 0px #363738;
+    --filter: none;
+}
+
+[data-theme="dark"] {
+    --background-color: #302E2E;
+    --color: #e2e2e2;
+    --shadow-color: rgba(255, 255, 255, 0.05);
+    --list-shadow: -2px -2px 4px rgba(255, 255, 255, 0.05), 0 0 10px 10px rgba(255, 255, 255, 0.005), 2px 2px 8px rgba(60, 60, 60, 0.1);
+    --toggle-shadow: -8px -4px 8px 0px #f6f6f6, 8px 4px 12px 0px #e2e2e2;
+    --filter: brightness(0) invert(1);
+}
+
+body {
+    width: 300px;
+    height: 475px;
+    background-color: var(--background-color);
+    color: var(--color);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 5px;
+}
+
+.logo {
+    font-family: 'AbeZee';
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.subTitle {
+    font-family: 'Dosis';
+    font-size: 12px;
+    text-align: center;
+    opacity: 0.5;
+    font-weight: 300;
+}
+
+.box {
+    margin: 0 auto;
+    height: 50px;
+    width: 200px;
+    border-radius: 12px;
+    background: var(--background-color);
+    box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 var(--shadow-color);
+}
+
+.box2 {
+    margin: 0 auto;
+    height: 40px;
+    width: 120px;
+    border-radius: 8px;
+    background: var(--background-color);
+    /* box-shadow: -14px -14px 29px #b6b6b6, 14px 14px 29px #f6f6f6; */
+    /* box-shadow: 12px 12px 24px 0 rgba(0, 0, 0, 0.2), -12px -12px 24px 0 var(--shadow-color); */
+    box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 var(--shadow-color);
+}
+
+.box3 {
+    margin: 0 auto;
+    height: 180px;
+    width: 300px;
+    border-radius: 8px;
+}
+
+.listItem {
+    margin: 0 auto;
+    height: 35px;
+    width: 270px;
+    border-radius: 4px;
+    background: var(--background-color);
+    /* box-shadow: inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2), inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5); */
+    /* box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.2), -8px -8px 16px 0 rgba(255, 255, 255, 0.5); */
+    box-shadow: var(--list-shadow);
+    margin-bottom: 10px;
+}
+
+.listBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    line-height: 35px;
+    font-family: 'Ubuntu';
+    padding-left: 10px;
+    padding-right: 10px;
+    opacity: 0.8;
+}
+
+#text {
+    font-size: 36px;
+    font-family: 'Ubuntu';
+    margin: 0 auto;
+    text-align: center;
+    line-height: 50px;
+}
+
+#text2,
+#text3 {
+    font-size: 24px;
+    font-family: 'Ubuntu';
+    margin: 0 auto;
+    text-align: center;
+    line-height: 40px;
+}
+
+.subText {
+    font-size: 14px;
+    font-family: 'Dosis';
+    opacity: 0.6;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.fraction {
+    font-size: 24px;
+}
+
+#totalDW {
+    font-size: 18px;
+}
+
+#totalDF {
+    font-size: 13px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 5px;
+}
+
+.footerIcon {
+    margin-right: 7px;
+}
+
+img {
+    filter: var(--filter);
+}
+
+#themeIcon {
+    cursor: pointer;
+}
+
+#units {
+    font-family: 'Dosis';
+    letter-spacing: 1.2px;
+    font-weight: 600;
+}
+
+.trailList {
+    height: 280px;
+    overflow-y: scroll;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+}
+
+#backBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    margin-left: 16px;
+    border-radius: 16px;
+    background: var(--background-color);
+    box-shadow: inset 4px 4px 8px 0 rgba(0, 0, 0, 0.2), inset -4px -4px 8px 0 var(--shadow-color);
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.trailHead {
+    display: flex;
+    justify-content: space-between;
+}
+
+hr {
+    opacity: 0.25;
+}
+
+.menu {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.middle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+a {
+    color: var(--color);
+}
+
+.clearDiv {
+    font-family: 'Dosis';
+    letter-spacing: 0.9px;
+    margin: 0 auto;
+    opacity: 0.75;
+    padding-top: 20px;
+    text-align: center;
+}

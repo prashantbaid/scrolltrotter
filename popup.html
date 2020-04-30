@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <link rel="stylesheet" href="popup.css">
+    <div class="header">
+        <div style="padding-right: 5px;"><img src='img/logo.png' height='28' width='28' /></div>
+        <div>
+            <div class="logo">SCROLLTROTTER</div>
+            <div class="subTitle">Logging your scroll adventures</div>
+        </div>
+    </div>
+    <hr />
+    <div class='menu'>
+        <!-- <input type="checkbox" id="switch" /><label for="switch">Toggle</label> -->
+        <div id='theme'><img src='img/moon.png' height='14' width='14' id='themeIcon' /></div>
+        <div id='units'><span id='km'>km</span> / <span id='mi'>mi</span></div>
+    </div>
+    <div id='home'>
+        <div class='subText'>TODAY</div>
+        <div class='box'>
+            <div id='text'></div>
+        </div>
+        <div class='middle'>
+            <div>
+                <div class='subText' style='font-size: 12px; margin-bottom: 5px;'>THIS MONTH</div>
+                <div class='box2'>
+                    <div id='text2'></div>
+                </div>
+            </div>
+            <div>
+                <div class='subText' style='font-size: 12px; margin-bottom: 5px;'>ALL TIME</div>
+                <div class='box2'>
+                    <div id='text3'></div>
+                </div>
+            </div>
+        </div>
+        <div id='bottom'>
+            <div class='subText' style='margin-top: 25px; font-size: 14px; margin-bottom: 5px;'>FAVOURITE TRAILS</div>
+            <div class='box3' id="trails">
+            </div>
+        </div>
+    </div>
+    <div id='allTrails'>
+        <div class='trailHead'>
+            <div id='backBtn'><img src='img/back.png' height='16' width='16' /></div>
+            <div class='subText' style='font-size: 14px; align-self: flex-end; margin-bottom: -3px;'>TOP TRAILS
+            </div>
+            <div style='opacity:0;'>
+                <div>RIGHT</div>
+            </div>
+        </div>
+        <div class='trailList'></div>
+        <div class='clearDiv'><a href='#' id='clearList'>Clear list</a></div>
+    </div>
+    <div class="footer">
+        <div style="display: flex; flex-direction: row;">
+            <div class='footerIcon'>
+                <a href='https://www.instagram.com/prshntb/' target='_blank'><img src='img/insta.png' height='10' width='10' /></a>
+            </div>
+            <div class='footerIcon'>
+                <a href='https://twitter.com/prstb' target='_blank'><img src='img/twitter.png' height='10' width='10' /></a>
+            </div>
+            <div class='footerIcon'>
+                <a href='mailto:prashantvbaid@gmail.com' target='_blank'><img src='img/email.png' height='10' width='10' /></a>
+            </div>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

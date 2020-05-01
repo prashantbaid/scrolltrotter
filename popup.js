@@ -1,4 +1,3 @@
-console.log('js script');
 let distObj;
 let currentUnit;
 
@@ -6,7 +5,6 @@ $(document).ready(() => {
     chrome.storage.local.get('distObj', (items) => {
         distObj = items.distObj;
         distObj.distanceByHost.sort((a, b) => b.dist - a.dist);
-        console.log('distObj.distanceByHost ', JSON.stringify(distObj.distanceByHost));
         if (distObj.distanceByHost.length === 0) {
             $('#bottom').hide();
         }
@@ -25,17 +23,14 @@ $(document).ready(() => {
 
 
 const setDistances = (distObj, unit) => {
-    console.log('unit is ', distObj);
     const totalDist = convertUnit(distObj.totalDistance, unit);
     const distToday = convertUnit(distObj.distanceToday, unit);
     const distThisMonth = convertUnit(distObj.distanceThisMonth, unit);
-    console.log('totalDist', totalDist);
     const totalDistParts = totalDist.dist.split('.');
     const distTodayParts = distToday.dist.split('.');
     const distThisMonthParts = distThisMonth.dist.split('.');
 
     const distByHost = distObj.distanceByHost;
-    console.log('distByHost ', distByHost);
     let html = '';
 
     distByHost.some((ele, i) => {
@@ -48,14 +43,13 @@ const setDistances = (distObj, unit) => {
         html += `<div class='listItem'><div class='listBody'><div>${ele.host}</div><div>${convertedDist.dist}${convertedDist.unit}</div></div></div>`
         $('#bottom').show();
     });
-    console.log('html is ', html);
+
     $('#text').html(`<span id='todayDW' class="whole">${distTodayParts[0]}</span><span id='todayDF' class="fraction">.${distTodayParts[1]}${distToday.unit}</span>`);
     $('#text2').html(`<span id='totalDW' class="whole">${distThisMonthParts[0]}</span><span id='totalDF' class="fraction">.${distThisMonthParts[1]}${distThisMonth.unit}</span>`);
     $('#text3').html(`<span id='totalDW' class="whole">${totalDistParts[0]}</span><span id='totalDF' class="fraction">.${totalDistParts[1]}${totalDist.unit}</span>`);
     $('#trails').html(html);
 
     if ($('#allTrails').is(':visible')) {
-        console.log('in if trails');
         moreTrails();
     }
 }
@@ -178,8 +172,4 @@ const setTheme = (step) => {
             chrome.storage.local.set({ theme: 'light' });
         }
     });
-}
-
-const switchTheme = (e) => {
-
 }

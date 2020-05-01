@@ -7,10 +7,7 @@ chrome.runtime.onInstalled.addListener(() => {
         today: new Date().toLocaleDateString(),
         distanceByHost: []
     }
-    chrome.storage.local.set({ distObj: initialObj, theme: 'dark', unit: 'km' }, () => {
-        console.log("Distance initialized");
-    });
-    chrome.storage.local.set({ theme: 'dark' });
+    chrome.storage.local.set({ distObj: initialObj, theme: 'dark', unit: 'km' });
 });
 
 chrome.runtime.onMessage.addListener((req, sender) => {
@@ -46,7 +43,6 @@ const cleanUpHostArr = (arr) => {
         return arr.filter((ele, i) => i < 100);
     }
 }
-
 
 const addHost = (arr, host, dist) => {
     let index = arr.findIndex((ele) => ele.host === host);

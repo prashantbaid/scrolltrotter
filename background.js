@@ -7,11 +7,15 @@ chrome.runtime.onInstalled.addListener(() => {
         today: new Date().toLocaleDateString(),
         distanceByHost: []
     }
-    chrome.storage.local.set({ distObj: initialObj, theme: 'dark', unit: 'km' });
+    chrome.storage.sync.get('distObj', (items) => {
+        if (!items.distObj) {
+            chrome.storage.sync.set({ distObj: initialObj, theme: 'dark', unit: 'km' });
+        }
+    });
 });
 
 chrome.runtime.onMessage.addListener((req, sender) => {
-    chrome.storage.local.get('distObj', (items) => {
+    chrome.storage.sync.get('distObj', (items) => {
         const distObj = items.distObj;
         const distMsg = req.distMsg;
         const newDistance = distObj.totalDistance + distMsg.dist;
@@ -27,20 +31,20 @@ chrome.runtime.onMessage.addListener((req, sender) => {
         } else {
             distObj.distanceThisMonth = distMsg.dist;
             distObj.today = new Date().toLocaleString('default', { month: 'long' });
-            //monthly clean up of the hostname array
+            //monthly clean up of saved hosts
             distObj.distanceByHost = cleanUpHostArr(arr);
         }
         distObj.distanceByHost = addHost(distObj.distanceByHost, distMsg.host, distMsg.dist);
-        chrome.storage.local.set({ distObj }, () => {})
+        chrome.storage.sync.set({ distObj }, () => {})
     })
 });
 
 const cleanUpHostArr = (arr) => {
-    if (arr.length < 100) {
+    if (arr.length < 50) {
         return;
     } else {
         arr.sort((a, b) => b.dist - a.dist);
-        return arr.filter((ele, i) => i < 100);
+        return arr.filter((ele, i) => i < 50);
     }
 }
 

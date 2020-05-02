@@ -2,7 +2,7 @@ let distObj;
 let currentUnit;
 
 $(document).ready(() => {
-    chrome.storage.local.get('distObj', (items) => {
+    chrome.storage.sync.get('distObj', (items) => {
         distObj = items.distObj;
         distObj.distanceByHost.sort((a, b) => b.dist - a.dist);
         if (distObj.distanceByHost.length === 0) {
@@ -60,12 +60,12 @@ const initialize = () => {
         'dark': 'img/sun.png',
         'light': 'img/moon.png'
     }
-    chrome.storage.local.get('theme', (result) => {
+    chrome.storage.sync.get('theme', (result) => {
         const theme = result.theme;
         document.documentElement.setAttribute('data-theme', theme);
         $("#themeIcon").attr("src", themeIcons[theme]);
     });
-    chrome.storage.local.get('unit', (result) => {
+    chrome.storage.sync.get('unit', (result) => {
         const unit = result.unit;
         currentUnit = unit;
         toggleUnit(unit);
@@ -73,7 +73,7 @@ const initialize = () => {
 }
 
 const setUnit = (unit) => {
-    chrome.storage.local.set({ unit });
+    chrome.storage.sync.set({ unit });
     toggleUnit(unit);
 
 }
@@ -119,7 +119,7 @@ const moreTrails = () => {
         host = ele.host;
         const convertedDist = convertUnit(ele.dist, currentUnit);
         html += `<div class='listItem'><div class='listBody'><div>${ele.host}</div><div>${convertedDist.dist}${convertedDist.unit}</div></div></div>`
-        return i === 50;
+        return i === 20;
     });
     $('.trailList').html(html);
     $('#allTrails').show();
@@ -133,10 +133,10 @@ const goBack = () => {
 const clearList = () => {
     const result = confirm('This will permanently delete the list. Are you sure?');
     if (result) {
-        chrome.storage.local.get('distObj', (items) => {
+        chrome.storage.sync.get('distObj', (items) => {
             distObj = items.distObj;
             distObj.distanceByHost = [];
-            chrome.storage.local.set({ distObj });
+            chrome.storage.sync.set({ distObj });
             setDistances(distObj, currentUnit);
             goBack();
         });
@@ -150,26 +150,26 @@ const toggleUnit = (unit) => {
         setDistances(distObj, 'mi');
         $('#km').css({ 'opacity': '0.4', cursor: 'pointer', title: 'convert unit to kms' });
         $('#mi').css({ 'opacity': 1, cursor: 'unset' });
-        chrome.storage.local.set({ unit: 'mi' });
+        chrome.storage.sync.set({ unit: 'mi' });
     } else {
         setDistances(distObj, 'km');
         $('#mi').css({ 'opacity': '0.4', cursor: 'pointer', title: 'convert unit to miles' });
         $('#km').css({ 'opacity': 1, cursor: 'unset' });
-        chrome.storage.local.set({ unit: 'km' });
+        chrome.storage.sync.set({ unit: 'km' });
     }
 }
 
 const setTheme = (step) => {
-    chrome.storage.local.get('theme', (items) => {
+    chrome.storage.sync.get('theme', (items) => {
         const theme = items.theme;
         if (theme === 'light') {
             document.documentElement.setAttribute('data-theme', 'dark');
-            $("#themeIcon").attr("src", "img/sun.png");
-            chrome.storage.local.set({ theme: 'dark' });
+            $("#themeIcon").attr({ "src": "img/sun.png", "title": "click here to enable light mode" });
+            chrome.storage.sync.set({ theme: 'dark' });
         } else {
             document.documentElement.setAttribute('data-theme', 'light');
-            $("#themeIcon").attr("src", "img/moon.png");
-            chrome.storage.local.set({ theme: 'light' });
+            $("#themeIcon").attr({ "src": "img/moon.png", "title": "click here to enable dark mode" });
+            chrome.storage.sync.set({ theme: 'light' });
         }
     });
 }

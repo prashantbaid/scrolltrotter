@@ -1,0 +1,30 @@
+{
+    "manifest_version": 2,
+    "name": "ScrollTrotter",
+    "version": "0.0.2",
+    "description": "Log the miles you've scrolled down the screen",
+    "icons": {
+        "16": "img/logo2.png",
+        "48": "img/logo2.png",
+        "128": "img/logo2.png"
+    },
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "content_scripts": [{
+        "matches": [
+            "http://*/*",
+            "https://*/*"
+        ],
+        "js": [
+            "dist.js"
+        ]
+    }],
+    "permissions": [
+        "storage"
+    ],
+    "browser_action": {
+        "default_popup": "popup.html"
+    }
+}

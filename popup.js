@@ -14,7 +14,7 @@ $(document).ready(() => {
 
 
     $("body").on("click", "div#theme", setTheme);
-    $("body").on("click", "div#moreTrails", moreTrails);
+    $("body").on("click", "a#moreTrails", moreTrails);
     $("body").on("click", "div#backBtn", goBack);
     $("body").on("click", "span#km", setUnit.bind(null, 'km'));
     $("body").on("click", "span#mi", setUnit.bind(null, 'mi'));
@@ -35,7 +35,7 @@ const setDistances = (distObj, unit) => {
 
     distByHost.some((ele, i) => {
         if (i === 3) {
-            html += `<div class='listItem' id='moreTrails'><div class='listBody'>+ More</div></div></div>`;
+            html += `<div class="moreDiv"><a href='#' id='moreTrails'>+More Trails</a></div>`;
             return true;
         }
         const host = ele.host;

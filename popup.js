@@ -147,12 +147,11 @@ const clearList = () => {
     if (result) {
         chrome.storage.local.get('distObj', (items) => {
             distObj = items.distObj;
-            distObj.distanceByHost = [];
-            chrome.storage.local.set({ distObj });
+            distObj.topTrails = [];
+            chrome.storage.local.set({ distObj, distByHost: [] });
             setDistances(distObj, currentUnit);
             goBack();
         });
-
     }
 }
 

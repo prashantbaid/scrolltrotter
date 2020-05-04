@@ -16,15 +16,12 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.runtime.onMessage.addListener((req, sender) => {
-    let distHost;
     chrome.storage.local.get(['distObj', 'distByHost'], (items) => {
         const distObj = items.distObj;
         let distByHost = items.distByHost;
         const scriptMsg = req.scriptMsg;
 
-        console.log('scriptMsg ', scriptMsg.dist);
-
-        const newDistance = distObj.totalDistance + scriptMsg.dist;
+        const newDistance = round(distObj.totalDistance + scriptMsg.dist);
         distObj.totalDistance = newDistance;
 
         if (distObj.today === new Date().toLocaleDateString()) {
@@ -39,6 +36,7 @@ chrome.runtime.onMessage.addListener((req, sender) => {
             distObj.distanceThisMonth = scriptMsg.dist;
             distObj.today = new Date().toLocaleString('default', { month: 'long' });
         }
+
         distByHost = addHost(distByHost, scriptMsg.host, scriptMsg.dist);
         distObj.topTrails = setTopTrails(distByHost);
         chrome.storage.local.set({ distObj, distByHost });
@@ -46,7 +44,6 @@ chrome.runtime.onMessage.addListener((req, sender) => {
 });
 
 const round = (num) => Math.round(num * 1000) / 1000;
-
 
 const setTopTrails = (arr) => {
     arr.sort((a, b) => b.dist - a.dist);

@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "ScrollTrotter",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Log the miles you've scrolled down the screen",
     "icons": {
         "16": "img/logo2.png",

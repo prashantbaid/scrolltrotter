@@ -24,8 +24,8 @@ setInterval(() => {
         didScroll = false;
         let host = window.location.hostname;
         chrome.runtime.sendMessage({
-            'distMsg': {
-                dist: Number(distAcc.toFixed(3)),
+            'scriptMsg': {
+                dist: Math.round(distAcc * 1000) / 1000,
                 host: host
             }
         });

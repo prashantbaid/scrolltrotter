@@ -5,54 +5,59 @@ chrome.runtime.onInstalled.addListener(() => {
         distanceThisMonth: 0,
         thisMonth: new Date().toLocaleString('default', { month: 'long' }),
         today: new Date().toLocaleDateString(),
-        distanceByHost: []
+        topTrails: []
     }
-    chrome.storage.sync.get('distObj', (items) => {
+
+    chrome.storage.local.get('distObj', (items) => {
         if (!items.distObj) {
-            chrome.storage.sync.set({ distObj: initialObj, theme: 'dark', unit: 'km' });
+            chrome.storage.local.set({ distObj: initialObj, theme: 'dark', unit: 'km', distByHost: [] });
         }
     });
 });
 
 chrome.runtime.onMessage.addListener((req, sender) => {
-    chrome.storage.sync.get('distObj', (items) => {
+    let distHost;
+    chrome.storage.local.get(['distObj', 'distByHost'], (items) => {
         const distObj = items.distObj;
-        const distMsg = req.distMsg;
-        const newDistance = distObj.totalDistance + distMsg.dist;
+        let distByHost = items.distByHost;
+        const scriptMsg = req.scriptMsg;
+
+        console.log('scriptMsg ', scriptMsg.dist);
+
+        const newDistance = distObj.totalDistance + scriptMsg.dist;
         distObj.totalDistance = newDistance;
+
         if (distObj.today === new Date().toLocaleDateString()) {
-            distObj.distanceToday = distObj.distanceToday + distMsg.dist;
+            distObj.distanceToday = round(distObj.distanceToday + scriptMsg.dist);
         } else {
-            distObj.distanceToday = distMsg.dist;
+            distObj.distanceToday = scriptMsg.dist;
             distObj.today = new Date().toLocaleDateString();
         }
         if (distObj.thisMonth === new Date().toLocaleString('default', { month: 'long' })) {
-            distObj.distanceThisMonth = distObj.distanceThisMonth + distMsg.dist;
+            distObj.distanceThisMonth = round(distObj.distanceThisMonth + scriptMsg.dist);
         } else {
-            distObj.distanceThisMonth = distMsg.dist;
+            distObj.distanceThisMonth = scriptMsg.dist;
             distObj.today = new Date().toLocaleString('default', { month: 'long' });
-            //monthly clean up of saved hosts
-            distObj.distanceByHost = cleanUpHostArr(arr);
         }
-        distObj.distanceByHost = addHost(distObj.distanceByHost, distMsg.host, distMsg.dist);
-        chrome.storage.sync.set({ distObj }, () => {})
+        distByHost = addHost(distByHost, scriptMsg.host, scriptMsg.dist);
+        distObj.topTrails = setTopTrails(distByHost);
+        chrome.storage.local.set({ distObj, distByHost });
     })
 });
 
-const cleanUpHostArr = (arr) => {
-    if (arr.length < 50) {
-        return;
-    } else {
-        arr.sort((a, b) => b.dist - a.dist);
-        return arr.filter((ele, i) => i < 50);
-    }
+const round = (num) => Math.round(num * 1000) / 1000;
+
+
+const setTopTrails = (arr) => {
+    arr.sort((a, b) => b.dist - a.dist);
+    return arr.filter((ele, i) => i < 20);
 }
 
 const addHost = (arr, host, dist) => {
     let index = arr.findIndex((ele) => ele.host === host);
     if (index > -1) {
         arr[index].host = host;
-        arr[index].dist = arr[index].dist + dist;
+        arr[index].dist = round(arr[index].dist + dist);
     } else {
         arr.push({
             host,

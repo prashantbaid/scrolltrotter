@@ -1,18 +1,3 @@
-@font-face {
-    font-family: Dosis;
-    src: url(../fonts/Dosis-200.ttf);
-}
-
-@font-face {
-    font-family: Ubuntu;
-    src: url(../fonts/Ubuntu-Bold.ttf);
-}
-
-@font-face {
-    font-family: AbeZee;
-    src: url(../fonts/AbeeZee-Regular.ttf);
-}
-
 :root {
     --background-color: #e2e2e2;
     --color: #363738;
@@ -47,15 +32,17 @@ body {
 }
 
 .logo {
-    font-family: 'AbeZee';
+    font-family: 'Arial Black';
+    letter-spacing: 0.5;
     font-size: 16px;
     text-align: center;
     font-weight: 600;
 }
 
 .subTitle {
-    font-family: 'Dosis';
-    font-size: 12px;
+    font-family: Geneva, Tahoma;
+    font-size: 11px;
+    letter-spacing: 0.75;
     text-align: center;
     opacity: 0.5;
     font-weight: 300;
@@ -105,7 +92,8 @@ body {
     flex-direction: row;
     justify-content: space-between;
     line-height: 35px;
-    font-family: 'Ubuntu';
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
     padding-left: 10px;
     padding-right: 10px;
     opacity: 0.8;
@@ -113,7 +101,7 @@ body {
 
 #text {
     font-size: 36px;
-    font-family: 'Ubuntu';
+    font-family: 'Arial Black';
     margin: 0 auto;
     text-align: center;
     line-height: 50px;
@@ -122,15 +110,16 @@ body {
 #text2,
 #text3 {
     font-size: 24px;
-    font-family: 'Ubuntu';
+    font-family: 'Arial Black';
     margin: 0 auto;
     text-align: center;
     line-height: 40px;
 }
 
 .subText {
-    font-size: 14px;
-    font-family: 'Dosis';
+    font-size: 12px;
+    font-family: Geneva, Tahoma;
+    letter-spacing: 0.5;
     opacity: 0.6;
     margin-bottom: 5px;
     text-align: center;
@@ -166,9 +155,9 @@ img {
 }
 
 #units {
-    font-family: 'Dosis';
+    font-family: Geneva, Tahoma;
     letter-spacing: 1.2px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .trailList {
@@ -221,8 +210,8 @@ a {
 }
 
 .clearDiv {
-    font-family: 'Dosis';
-    letter-spacing: 0.9px;
+    font-family: Geneva, Tahoma;
+    letter-spacing: 0.5px;
     margin: 0 auto;
     opacity: 0.75;
     padding-top: 20px;
@@ -230,10 +219,11 @@ a {
 }
 
 .moreDiv {
-    font-family: 'Dosis';
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 0.9px;
+    font-family: Geneva, Tahoma;
+    font-weight: 400;
+    opacity: 0.75;
+    font-size: 12px;
+    letter-spacing: 0.5px;
     text-align: right;
     padding-right: 20px;
 }

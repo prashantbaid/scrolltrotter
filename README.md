@@ -6,10 +6,9 @@ How many miles do you think we've all scrolled today?
 
 This extension tries to answer this question precisely. It converts pixels scrolled into an actual physical unit of distance. It logs your scrolling adventures on the web and displays the metrics in a very big font but in a non-shaming way. Along with the list of your top scroll destinations on the web.
 
+Chrome Web Store URL: https://chrome.google.com/webstore/detail/scrolltrotter/mppejknbhapogefdpekbpalahphlhgdm
+
 Firefox Add On URL: https://addons.mozilla.org/en-GB/firefox/addon/scrolltrotter/
-
-Chrome Web Store URL: yet to be published
-
 
 Note about the privacy of the extension: your scroll miles cannot be accessed by the author of this extension and can never leave your system.
 
